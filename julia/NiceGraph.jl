@@ -1,16 +1,13 @@
-#using LightGraphs
-#using SimpleWeightedGraphs
-
 mutable struct NiceGraph
-    n::Integer
-    edges
-    trigs
-    w
-    eps0
-    e
-    B1
-    B2
-    points
+    n::Integer   # vertices
+    edges   # list of edges
+    trigs   # list of triangles 
+    w   # edges' weights
+    eps0    # perturbation norm
+    e   # the diagonal of the pertubation matrix E
+    B1  # boundary operator ∂_1
+    B2  # boundary operator ∂_2
+    points  # coordinates of vertices
     
    NiceGraph(n, edges, trigs, w, eps0, e, points=nothing)=new(
        n, edges, trigs, w, eps0, e, 
@@ -20,6 +17,11 @@ mutable struct NiceGraph
    )
 end
 
+"""
+    getPositions(points, w, eps0, e, B1)
+
+    If `points` are specified by the user, returns `points`; otherwise, builds weighted adjacency matrix and call `springLayout`
+"""
 function getPositions(points, w, eps0, e, B1)
     if isnothing(points)
         W=Diagonal( vec(sqrt.(w)+eps0*e) );
@@ -31,6 +33,11 @@ function getPositions(points, w, eps0, e, B1)
     return points
 end
 
+"""
+    B1fromEdges(n, edges)
+
+    generates B1 matrix from the edge list
+"""
 function B1fromEdges(n, edges)
     m = size(edges, 1);
     B1 = spzeros(n, m);
@@ -42,6 +49,11 @@ function B1fromEdges(n, edges)
     return B1
 end
 
+"""
+    B2fromTrig(edges, trigs)
+
+    generates B2 matrix from edge and triangle list
+"""
 function B2fromTrig(edges, trigs)
     
     m = size(edges, 1);
@@ -59,23 +71,14 @@ function B2fromTrig(edges, trigs)
     return B2
 end
 
-function getAdjB1W(G::NiceGraph)
-    W = getW(G);
-    Aw = Diagonal(diag(G.B1 * W * W * G.B1'))-G.B1 * W * W * G.B1';
-    return Aw
-end
+"""
+    springLayout(adj_matrix)
 
-function getAdjB1(G::NiceGraph)
-    A=Diagonal(diag(G.B1 * G.B1'))-G.B1 * G.B1';
-    return A
-end
+    The function builds a classic `springLayout` for graph's vertices from the adjacency matrix `adj_matrix`
 
-function getW(G::NiceGraph)
-    W=Diagonal(sqrt.(G.w)+G.eps0*G.e);
-    return W
-end
-
-
+    See:
+     Force-directed graph drawing. (2022, November 13). In Wikipedia. [https://en.wikipedia.org/wiki/Force-directed_graph_drawing][https://en.wikipedia.org/wiki/Force-directed_graph_drawing]
+"""
 function springLayout(adj_matrix)
 
     nvg = size(adj_matrix, 1)
