@@ -1,6 +1,6 @@
 module HOLaGraF_lsmr
 
-      export myEig,  readMatrix, NiceGraph, getW1, getW0, getW2, getL0, getL1, getL1up, getP, getK, getJ10, getJ12, F, getGrad, EulerStep, checkStep, innerLevel, alphaLevel, freeGradientTransition, doMaxPool, Thresh, placer, placeL1up, LinearAlgebra, Random, DelimitedFiles, Arpack, SparseArrays, LinearMaps, LinearOperators, Krylov, ArnoldiMethod
+      export myEig,  readMatrix, NiceGraph, getW1, getW0, getW2, getL0, getL1, getL1up, getP, getK, getJ10, getJ12, F, getGrad, EulerStep, checkStep, innerLevel, alphaLevel, freeGradientTransition, doMaxPool, Thresh, placer, placeL1up
 
       using Random
       using DelimitedFiles
@@ -28,7 +28,6 @@ module HOLaGraF_lsmr
       using SuiteSparse
       import LinearAlgebra.ldiv!
       using IncompleteLU, LimitedLDLFactorizations, ILUZero
-      using ArnoldiMethod
       
       ldiv!(y::Vector{T}, F::SuiteSparse.CHOLMOD.Factor{T}, x::Vector{T}) where T = (y .= F \ x)
       ldiv!(F::SuiteSparse.CHOLMOD.Factor{Float64}, x::Vector{Float64}) = ( ldiv!(x, F, x) )
