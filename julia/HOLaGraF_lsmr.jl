@@ -1,6 +1,6 @@
-module ShibariSmart_lsmr
+module HOLaGraF_lsmr
 
-      export myEig,  readMatrix, NiceGraph, getW1, getW0, getW2, getL0, getL1, getL1up, getP, getK, getJ10, getJ12, F, getGrad, EulerStep, checkStep, innerLevel, alphaLevel, freeGradientTransition, doMaxPool, Thresh, placer, placeL1up
+      export myEig,  readMatrix, NiceGraph, getW1, getW0, getW2, getL0, getL1, getL1up, getP, getK, getJ10, getJ12, F, getGrad, EulerStep, checkStep, innerLevel, alphaLevel, freeGradientTransition, doMaxPool, Thresh, placer, placeL1up, LinearAlgebra, Random, DelimitedFiles, Arpack, SparseArrays, LinearMaps, LinearOperators, Krylov, ArnoldiMethod
 
       using Random
       using DelimitedFiles
