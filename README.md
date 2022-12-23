@@ -10,7 +10,7 @@ We advise to consult the companion paper:
 
 > "*Quantifying the structural stability of simplicial homology*" by **Nicola Guglielm**i, **Anton Savostianov** and **Francesco Tudisco**.
 
-Briefly, we aim to increase the number of **1-dimensional holes** in the simplicial complex $ \mathcal K $ though increasing the dimension of the kernel of corresponding higher-order Laplacian operator $\bar L_1 $.
+Briefly, we aim to increase the number of **1-dimensional holes** in the simplicial complex $\mathcal K $ though increasing the dimension of the kernel of corresponding higher-order Laplacian operator $\bar L_1 $.
 
 ## Minimal working example
 
